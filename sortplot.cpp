@@ -1,14 +1,14 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
 
-QVector<double> qv_x(500),qv_y(500);
+QVector<double> qv_x(150),qv_y(150);
 
 sortplot::sortplot(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::sortplot){
         ui->setupUi(this);
 	ui->plot->xAxis->grid()->setVisible(false);
-	ui->plot->xAxis->setRange(-1, 501);
+	ui->plot->xAxis->setRange(-1, 151);
 	ui->plot->yAxis->setRange(0, 1200);
 	
 	unsort();
@@ -21,26 +21,43 @@ sortplot::~sortplot(){
 
 void sortplot::on_sortButton_clicked(){
 	int min,aux;
-	//selection sort
-	for (int i = 0; i < qv_x.size(); i++) {
-		min = i;
-		//plot in green the min
-		for(int j =i+1;j< qv_x.size();j++){
-			//plot in red the j
-			if(qv_y[j]<qv_y[min]){
-				min = j;
+	//<selection sort>
+	if(ui->sorting->currentText() == "Selection sort"){
+		for (int i = 0; i < qv_x.size(); i++) {
+			min = i;
+			//plot in green the min
+			for(int j =i+1;j< qv_x.size();j++){
+				//plot in red the j
+				if(qv_y[j]<qv_y[min]){
+					min = j;
+				}
+			}
+			if(qv_y[i] != qv_y[min]){
+				//plot in blue both and unplot
+				aux = qv_y[i];
+				qv_y[i] = qv_y[min];
+				qv_y[min] = aux;
+				replotbars(min,i);
+			}
+			else
+				replotbars(min,i);
+		}
+	}//</selection sort>
+	min=0,aux=0;
+	//<bubble sort>
+	if(ui->sorting->currentText() == "Bubble sort"){
+		for (int i = 1; i < qv_x.size(); i++) {
+			for (int j = 0; j < qv_x.size() -i ; j++) {
+				if (qv_y[j] > qv_y[j+1]) {
+					aux = qv_y[j];
+					qv_y[j] = qv_y[j+1];
+					qv_y[j+1] = aux;
+					replotbars(j+1,j);
+				}
 			}
 		}
-		if(qv_y[i] != qv_y[min]){
-			//plot in blue both and unplot
-			aux = qv_y[i];
-			qv_y[i] = qv_y[min];
-			qv_y[min] = aux;
-			replotbars(min,i);
-		}
-		else
-			replotbars(min,i);
-	}
+	}//</bubble sort>
+	
 	
 }
 
@@ -72,7 +89,7 @@ void sortplot::replotbars(int min,int key){
 	
 	keybar->setPen(QColor(0,255,255));
 	keybar->addData(key,1001);
-
+	
 	ui->plot->replot();
 }
 void sortplot::unsort(){
