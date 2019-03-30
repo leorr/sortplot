@@ -25,7 +25,6 @@ private slots:
     void on_sortButton_clicked();
     void on_unsortButton_clicked();
 
-
 private:
     Ui::sortplot *ui;
 
