@@ -9,7 +9,7 @@ extern QCPBars *bar;
 extern QCPBars *hl;
 
 namespace Ui {
-class sortplot;
+	class sortplot;
 }
 
 class sortplot : public QMainWindow{
@@ -21,12 +21,13 @@ public:
 
 
 private slots:
-    QCPBars* replotbars();
-    void on_sortButton_clicked();
-    void on_unsortButton_clicked();
+	void unsort();
+	void replotbars(int min,int key);
+	void on_sortButton_clicked();
+	void on_unsortButton_clicked();
 
 private:
-    Ui::sortplot *ui;
+	Ui::sortplot *ui;
 
 };
 
