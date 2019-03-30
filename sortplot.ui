@@ -17,11 +17,37 @@
    <widget class="QCustomPlot" name="plot" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>70</y>
-      <width>120</width>
-      <height>80</height>
+      <x>109</x>
+      <y>10</y>
+      <width>281</width>
+      <height>281</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="unsortButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>unsort</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sortButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>sort</string>
     </property>
    </widget>
   </widget>
