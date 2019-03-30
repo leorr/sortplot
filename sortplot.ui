@@ -40,8 +40,8 @@
    <widget class="QPushButton" name="sortButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
+      <x>150</x>
+      <y>30</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -49,6 +49,31 @@
     <property name="text">
      <string>sort</string>
     </property>
+   </widget>
+   <widget class="QComboBox" name="sorting">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>231</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Selection sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Bubble sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Insertion sort</string>
+     </property>
+    </item>
    </widget>
   </widget>
  </widget>
