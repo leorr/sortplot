@@ -7,16 +7,15 @@ namespace Ui {
 class sortplot;
 }
 
-class sortplot : public QMainWindow
-{
-    Q_OBJECT
+class sortplot : public QMainWindow{
+	Q_OBJECT
 
 public:
-    explicit sortplot(QWidget *parent = nullptr);
-    ~sortplot();
+	explicit sortplot(QWidget *parent = nullptr);
+	~sortplot();
 
 private:
-    Ui::sortplot *ui;
+	Ui::sortplot *ui;
 };
 
 #endif // SORTPLOT_H

@@ -1,11 +1,10 @@
 #include "sortplot.h"
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    sortplot w;
-    w.show();
+int main(int argc, char *argv[]){
+	QApplication a(argc, argv);
+	sortplot w;
+	w.show();
 
-    return a.exec();
+	return a.exec();
 }
