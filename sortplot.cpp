@@ -57,7 +57,25 @@ void sortplot::on_sortButton_clicked(){
 			}
 		}
 	}//</bubble sort>
-	
+	//<insertion sort>
+	if(ui->sorting->currentText() == "Insertion sort"){
+		for (int i = 0; i < qv_y.size(); i++) {
+			aux = i;
+			while(aux>0){
+				if(qv_y[aux-1]>qv_y[aux]){
+					replotbars(aux,aux-1);
+					int temp = qv_y[aux-1];
+					qv_y[aux-1] = qv_y[aux];
+					qv_y[aux] =temp;
+				}
+				else{
+					break;
+				}
+			aux--;
+			}
+		}
+	}//</insertion sort>
+
 	
 }
 
