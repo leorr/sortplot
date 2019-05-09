@@ -20,20 +20,24 @@ sortplot::~sortplot(){
 }
 
 void sortplot::on_sortButton_clicked(){
-	int min,aux;
+	int min,aux;//variavéis unicamente auxíliares
+	int comp,swi;//contador de comparações e trocas realizadas
 	//<selection sort>
 	if(ui->sorting->currentText() == "Selection sort"){
+		min=0,aux=0,comp=0,swi=0;
 		for (int i = 0; i < qv_x.size(); i++) {
 			min = i;
 			//plot in green the min
 			for(int j =i+1;j< qv_x.size();j++){
 				//plot in red the j
+				comp++;
 				if(qv_y[j]<qv_y[min]){
 					min = j;
 				}
 			}
 			if(qv_y[i] != qv_y[min]){
 				//plot in blue both and unplot
+				swi++;
 				aux = qv_y[i];
 				qv_y[i] = qv_y[min];
 				qv_y[min] = aux;
@@ -42,13 +46,14 @@ void sortplot::on_sortButton_clicked(){
 			else
 				replotbars(min,i);
 		}
-	}//</selection sort>
-	min=0,aux=0;
 	//<bubble sort>
 	if(ui->sorting->currentText() == "Bubble sort"){
+		min=0,aux=0,comp=0,swi=0;
 		for (int i = 1; i < qv_x.size(); i++) {
 			for (int j = 0; j < qv_x.size() -i ; j++) {
+				comp++;
 				if (qv_y[j] > qv_y[j+1]) {
+					swi++;
 					aux = qv_y[j];
 					qv_y[j] = qv_y[j+1];
 					qv_y[j+1] = aux;
