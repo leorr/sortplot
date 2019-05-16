@@ -12,6 +12,8 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -27,6 +29,10 @@ public:
     QPushButton *unsortButton;
     QPushButton *sortButton;
     QComboBox *sorting;
+    QLCDNumber *comp;
+    QLCDNumber *swi;
+    QLabel *label;
+    QLabel *label_2;
 
     void setupUi(QMainWindow *sortplot)
     {
@@ -50,6 +56,23 @@ public:
         sorting->addItem(QString());
         sorting->setObjectName(QString::fromUtf8("sorting"));
         sorting->setGeometry(QRect(10, 80, 231, 24));
+        comp = new QLCDNumber(centralWidget);
+        comp->setObjectName(QString::fromUtf8("comp"));
+        comp->setGeometry(QRect(110, 180, 131, 31));
+        swi = new QLCDNumber(centralWidget);
+        swi->setObjectName(QString::fromUtf8("swi"));
+        swi->setGeometry(QRect(110, 320, 131, 31));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(110, 300, 51, 20));
+        QFont font;
+        font.setFamily(QString::fromUtf8("Roboto"));
+        font.setPointSize(11);
+        label->setFont(font);
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(110, 160, 101, 16));
+        label_2->setFont(font);
         sortplot->setCentralWidget(centralWidget);
 
         retranslateUi(sortplot);
@@ -66,6 +89,8 @@ public:
         sorting->setItemText(1, QApplication::translate("sortplot", "Bubble sort", nullptr));
         sorting->setItemText(2, QApplication::translate("sortplot", "Insertion sort", nullptr));
 
+        label->setText(QApplication::translate("sortplot", "Trocas", nullptr));
+        label_2->setText(QApplication::translate("sortplot", "Compara\303\247\303\265es", nullptr));
     } // retranslateUi
 
 };

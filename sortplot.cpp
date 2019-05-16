@@ -1,19 +1,17 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
 
-QVector<double> qv_x(150),qv_y(150);
+QVector<double> qv_x(100),qv_y(100);
 
 sortplot::sortplot(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::sortplot){
         ui->setupUi(this);
 	ui->plot->xAxis->grid()->setVisible(false);
-	ui->plot->xAxis->setRange(-1, 151);
+	ui->plot->xAxis->setRange(-1, 101);
 	ui->plot->yAxis->setRange(0, 1200);
-	
 	unsort();
-
-	}
+	}//init
 
 sortplot::~sortplot(){
 	delete ui;
@@ -23,51 +21,52 @@ void sortplot::on_sortButton_clicked(){
 	int min,aux;//variavéis unicamente auxíliares
 	int comp,swi;//contador de comparações e trocas realizadas
 	//<selection sort>
+	ui->comp->display(0);
+	ui->swi->display(0);
 	if(ui->sorting->currentText() == "Selection sort"){
 		min=0,aux=0,comp=0,swi=0;
 		for (int i = 0; i < qv_x.size(); i++) {
 			min = i;
-			//plot in green the min
 			for(int j =i+1;j< qv_x.size();j++){
-				//plot in red the j
-				comp++;
-				if(qv_y[j]<qv_y[min]){
+				ui->comp->display(++comp);
+				replotbars(min,j);
+				if(qv_y[j]<qv_y[min])
 					min = j;
-				}
 			}
 			if(qv_y[i] != qv_y[min]){
-				//plot in blue both and unplot
-				swi++;
+				ui->swi->display(++swi);
 				aux = qv_y[i];
 				qv_y[i] = qv_y[min];
 				qv_y[min] = aux;
-				replotbars(min,i);
 			}
-			else
-				replotbars(min,i);
+			replotbars(min,i);
 		}
+	}
 	//<bubble sort>
 	if(ui->sorting->currentText() == "Bubble sort"){
 		min=0,aux=0,comp=0,swi=0;
 		for (int i = 1; i < qv_x.size(); i++) {
 			for (int j = 0; j < qv_x.size() -i ; j++) {
-				comp++;
+				ui->comp->display(++comp);
 				if (qv_y[j] > qv_y[j+1]) {
-					swi++;
+					ui->swi->display(++swi);
 					aux = qv_y[j];
 					qv_y[j] = qv_y[j+1];
 					qv_y[j+1] = aux;
-					replotbars(j+1,j);
 				}
+				replotbars(j+1,j);
 			}
 		}
 	}//</bubble sort>
 	//<insertion sort>
 	if(ui->sorting->currentText() == "Insertion sort"){
+		aux=0,comp=0,swi=0;
 		for (int i = 0; i < qv_y.size(); i++) {
 			aux = i;
 			while(aux>0){
+				ui->comp->display(++comp);
 				if(qv_y[aux-1]>qv_y[aux]){
+					ui->swi->display(++swi);
 					replotbars(aux,aux-1);
 					int temp = qv_y[aux-1];
 					qv_y[aux-1] = qv_y[aux];
@@ -79,9 +78,7 @@ void sortplot::on_sortButton_clicked(){
 			aux--;
 			}
 		}
-	}//</insertion sort>
-
-	
+	}//</insertion sort>	
 }
 
 
