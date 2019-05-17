@@ -1,14 +1,14 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
 
-QVector<double> qv_x(100),qv_y(100);
+QVector<double> qv_x(50),qv_y(50);
 
 sortplot::sortplot(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::sortplot){
         ui->setupUi(this);
 	ui->plot->xAxis->grid()->setVisible(false);
-	ui->plot->xAxis->setRange(-1, 101);
+	ui->plot->xAxis->setRange(-1, 51);
 	ui->plot->yAxis->setRange(0, 1200);
 	unsort();
 	}//init
@@ -29,7 +29,7 @@ void sortplot::on_sortButton_clicked(){
 			min = i;
 			for(int j =i+1;j< qv_x.size();j++){
 				ui->comp->display(++comp);
-				replotbars(min,j);
+				replotbars(i,j);
 				if(qv_y[j]<qv_y[min])
 					min = j;
 			}
@@ -39,7 +39,7 @@ void sortplot::on_sortButton_clicked(){
 				qv_y[i] = qv_y[min];
 				qv_y[min] = aux;
 			}
-			replotbars(min,i);
+			
 		}
 	}
 	//<bubble sort>
@@ -65,9 +65,9 @@ void sortplot::on_sortButton_clicked(){
 			aux = i;
 			while(aux>0){
 				ui->comp->display(++comp);
+				replotbars(i+1,aux);
 				if(qv_y[aux-1]>qv_y[aux]){
 					ui->swi->display(++swi);
-					replotbars(aux,aux-1);
 					int temp = qv_y[aux-1];
 					qv_y[aux-1] = qv_y[aux];
 					qv_y[aux] =temp;
