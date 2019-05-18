@@ -119,7 +119,7 @@ void sortplot::unsort(){
 }
 
 void sortplot::merge(int l,int m,int r){
-	int i, j, k; 
+	int i, j, k;
     int n1 = m - l + 1; 
     int n2 =  r - m; 
     int L[n1], R[n2]; 
@@ -166,10 +166,10 @@ void sortplot::merge(int l,int m,int r){
 }
 void sortplot::mergeSort(int l, int r) { 
     if (l < r){ 
-        int m = l+(r-l)/2; 
-        mergeSort(l, m); 
+        int m = l+(r-l)/2;//l=0, r = tamanho -1
+        mergeSort(l, m);//separa o vetor tem vários vetores menores, criando stacks de pequenos vetores na call
         mergeSort(m+1, r); 
-        merge(l, m, r); 
+        merge(l, m, r);
     } 
 } 
 
