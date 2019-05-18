@@ -66,6 +66,11 @@
     </item>
     <item>
      <property name="text">
+      <string>Merge sort</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Bubble sort</string>
      </property>
     </item>

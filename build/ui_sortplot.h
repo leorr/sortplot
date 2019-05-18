@@ -54,6 +54,7 @@ public:
         sorting->addItem(QString());
         sorting->addItem(QString());
         sorting->addItem(QString());
+        sorting->addItem(QString());
         sorting->setObjectName(QString::fromUtf8("sorting"));
         sorting->setGeometry(QRect(10, 80, 231, 24));
         comp = new QLCDNumber(centralWidget);
@@ -86,8 +87,9 @@ public:
         unsortButton->setText(QApplication::translate("sortplot", "unsort", nullptr));
         sortButton->setText(QApplication::translate("sortplot", "sort", nullptr));
         sorting->setItemText(0, QApplication::translate("sortplot", "Selection sort", nullptr));
-        sorting->setItemText(1, QApplication::translate("sortplot", "Bubble sort", nullptr));
-        sorting->setItemText(2, QApplication::translate("sortplot", "Insertion sort", nullptr));
+        sorting->setItemText(1, QApplication::translate("sortplot", "Merge sort", nullptr));
+        sorting->setItemText(2, QApplication::translate("sortplot", "Bubble sort", nullptr));
+        sorting->setItemText(3, QApplication::translate("sortplot", "Insertion sort", nullptr));
 
         label->setText(QApplication::translate("sortplot", "Trocas", nullptr));
         label_2->setText(QApplication::translate("sortplot", "Compara\303\247\303\265es", nullptr));

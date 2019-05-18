@@ -25,6 +25,8 @@ private slots:
 	void replotbars(int min,int key);
 	void on_sortButton_clicked();
 	void on_unsortButton_clicked();
+	void merge(int l,int m,int r);
+	void mergeSort(int l, int r);
 
 private:
 	Ui::sortplot *ui;
