@@ -1,7 +1,7 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
 
-QVector<double> qv_x(50),qv_y(50);
+QVector<double> qv_x(100),qv_y(100);
 int minim,aux;//variavéis unicamente auxíliares
 int comp,swi;//contador de comparações e trocas realizadas
 
@@ -10,7 +10,7 @@ sortplot::sortplot(QWidget *parent) :
 	ui(new Ui::sortplot){
 			ui->setupUi(this);
 			ui->plot->xAxis->grid()->setVisible(false);
-			ui->plot->xAxis->setRange(-1, 51);
+			ui->plot->xAxis->setRange(-1, 101);
 			ui->plot->yAxis->setRange(0, 1200);
 			unsort();
 	}//init
@@ -30,9 +30,9 @@ void sortplot::on_sortButton_clicked(){
 			minim = i;
 			for(int j =i+1;j< qv_x.size();j++){
 				ui->comp->display(++comp);
-				replotbars(i,j);
 				if(qv_y[j]<qv_y[minim])
 					minim = j;
+				replotbars(i,j,minim);
 			}
 			if(qv_y[i] != qv_y[minim]){
 				ui->swi->display(++swi);
@@ -42,6 +42,7 @@ void sortplot::on_sortButton_clicked(){
 			}
 			
 		}
+		replotbars(-10,-10,-10);
 	}
 	//<bubble sort>
 	if(ui->sorting->currentText() == "Bubble sort"){
@@ -54,9 +55,10 @@ void sortplot::on_sortButton_clicked(){
 					qv_y[j] = qv_y[j+1];
 					qv_y[j+1] = aux;
 				}
-				replotbars(j+1,j);
+				replotbars(j+1,j,qv_x.size()-i);
 			}
 		}
+		replotbars(-10,-10,-10);
 	}//</bubble sort>
 	//<insertion sort>
 	if(ui->sorting->currentText() == "Insertion sort"){
@@ -64,7 +66,7 @@ void sortplot::on_sortButton_clicked(){
 			aux = i;
 			while(aux>0){
 				ui->comp->display(++comp);
-				replotbars(i+1,aux);
+				replotbars(i+1,aux,aux);
 				if(qv_y[aux-1]>qv_y[aux]){
 					ui->swi->display(++swi);
 					int temp = qv_y[aux-1];
@@ -77,9 +79,12 @@ void sortplot::on_sortButton_clicked(){
 			aux--;
 			}
 		}
+		replotbars(-10,-10,-10);
 	}//</insertion sort>	
-	if(ui->sorting->currentText() == "Merge sort")
-		mergeSort(0,49);
+	if(ui->sorting->currentText() == "Merge sort"){
+		mergeSort(0,99);
+		replotbars(-10,-10,-10);
+	}
 }
 
 
@@ -88,14 +93,17 @@ void sortplot::on_unsortButton_clicked(){
 	unsort();
 }
 
-void sortplot::replotbars(int minim,int key){
+void sortplot::replotbars(int minim,int key,int scan){
 	
 	QCPBars* nbar;
 	QCPBars* keybar;
 	QCPBars* minimbar;
+	QCPBars* scanbar;
+	
 	
 	ui->plot->clearPlottables();
 	
+	scanbar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
 	nbar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
 	minimbar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
 	keybar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
@@ -111,11 +119,14 @@ void sortplot::replotbars(int minim,int key){
 	keybar->setPen(QColor(0,255,255));
 	keybar->addData(key,1001);
 	
+	scanbar->setPen(QColor(0,255,0));
+	scanbar->addData(scan,1001);
+	
 	ui->plot->replot();
 }
 void sortplot::unsort(){
 	for (int i = 0; i < qv_x.size(); i++){qv_x[i]=i;qv_y[i] = rand() % 1000;}//setting x from 0 to 99 and y to a random number
-	replotbars(-2,-2);
+	replotbars(-2,-2,-2);
 }
 
 void sortplot::merge(int l,int m,int r){
@@ -133,13 +144,13 @@ void sortplot::merge(int l,int m,int r){
     while (i < n1 && j < n2){ 
 		ui->comp->display(++comp);
         if (L[i] <= R[j]) {
-			replotbars(i,j);
+			replotbars(k,k,k);
 			ui->swi->display(++swi);
             qv_y[k] = L[i]; 
             i++; 
         } 
         else{ 
-			replotbars(k,j);
+			replotbars(k,k,k);
 			ui->swi->display(++swi);
             qv_y[k] = R[j]; 
             j++; 
@@ -148,7 +159,7 @@ void sortplot::merge(int l,int m,int r){
     } 
   
     while (i < n1){ 
-		replotbars(k,i);
+		replotbars(k,k,k);
 		ui->swi->display(++swi);
         qv_y[k] = L[i]; 
         i++; 
@@ -156,7 +167,7 @@ void sortplot::merge(int l,int m,int r){
     } 
   
     while (j < n2){ 
-		replotbars(k,j);
+		replotbars(k,k,k);
 		ui->swi->display(++swi);
         qv_y[k] = R[j]; 
         j++; 

@@ -22,7 +22,7 @@ public:
 
 private slots:
 	void unsort();
-	void replotbars(int min,int key);
+	void replotbars(int min,int key,int scan);
 	void on_sortButton_clicked();
 	void on_unsortButton_clicked();
 	void merge(int l,int m,int r);
