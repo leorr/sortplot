@@ -1,7 +1,8 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
 
-QVector<double> qv_x(100),qv_y(100);
+int vsize=10;
+QVector<double> qv_x(vsize),qv_y(vsize);
 int minim,aux;//variavéis unicamente auxíliares
 int comp,swi;//contador de comparações e trocas realizadas
 
@@ -10,7 +11,7 @@ sortplot::sortplot(QWidget *parent) :
 	ui(new Ui::sortplot){
 			ui->setupUi(this);
 			ui->plot->xAxis->grid()->setVisible(false);
-			ui->plot->xAxis->setRange(-1, 101);
+			ui->plot->xAxis->setRange(-1, vsize);
 			ui->plot->yAxis->setRange(0, 1200);
 			unsort();
 	}//init
@@ -82,7 +83,7 @@ void sortplot::on_sortButton_clicked(){
 		replotbars(-10,-10,-10);
 	}//</insertion sort>	
 	if(ui->sorting->currentText() == "Merge sort"){
-		mergeSort(0,99);
+		mergeSort(0,vsize-1);
 		replotbars(-10,-10,-10);
 	}
 }
@@ -184,3 +185,11 @@ void sortplot::mergeSort(int l, int r) {
     } 
 } 
 
+
+void sortplot::on_spinBox_valueChanged(int arg1){
+		qv_x.resize(arg1);
+		qv_y.resize(arg1);
+		vsize=arg1;
+		ui->plot->xAxis->setRange(-1, arg1+1);
+		unsort();
+}

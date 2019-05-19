@@ -28,6 +28,8 @@ private slots:
 	void merge(int l,int m,int r);
 	void mergeSort(int l, int r);
 
+    void on_spinBox_valueChanged(int arg1);
+
 private:
 	Ui::sortplot *ui;
 

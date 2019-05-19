@@ -17,126 +17,146 @@
    <widget class="QCustomPlot" name="plot" native="true">
     <property name="geometry">
      <rect>
-      <x>249</x>
-      <y>10</y>
-      <width>741</width>
-      <height>491</height>
+      <x>-1</x>
+      <y>0</y>
+      <width>1001</width>
+      <height>511</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="unsortButton">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>30</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>unsort</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="sortButton">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>30</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>sort</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="sorting">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>231</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>Selection sort</string>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>0</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
      </property>
-    </item>
-    <item>
      <property name="text">
-      <string>Merge sort</string>
+      <string>Comparações</string>
      </property>
-    </item>
-    <item>
+    </widget>
+    <widget class="QLCDNumber" name="comp">
+     <property name="geometry">
+      <rect>
+       <x>860</x>
+       <y>20</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="swi">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>20</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>0</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
      <property name="text">
-      <string>Bubble sort</string>
+      <string>Trocas</string>
      </property>
-    </item>
-    <item>
+    </widget>
+    <widget class="QSpinBox" name="spinBox">
+     <property name="geometry">
+      <rect>
+       <x>630</x>
+       <y>0</y>
+       <width>81</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>1000</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>0</y>
+       <width>20</width>
+       <height>51</height>
+      </rect>
+     </property>
      <property name="text">
-      <string>Insertion sort</string>
+      <string>N</string>
      </property>
-    </item>
-   </widget>
-   <widget class="QLCDNumber" name="comp">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>180</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="swi">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>320</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>300</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Roboto</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Trocas</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>160</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Roboto</family>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Comparações</string>
-    </property>
+    </widget>
+    <widget class="QPushButton" name="sortButton">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>0</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>sort</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="unsortButton">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>30</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>unsort</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="sorting">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>0</y>
+       <width>231</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Selection sort</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Merge sort</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bubble sort</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Insertion sort</string>
+      </property>
+     </item>
+    </widget>
    </widget>
   </widget>
  </widget>
