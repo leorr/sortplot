@@ -21,74 +21,19 @@ sortplot::~sortplot(){
 }
 
 void sortplot::on_sortButton_clicked(){
-	//<selection sort>
 	ui->comp->display(0);
 	ui->swi->display(0);
 	minim=0,aux=0,comp=0,swi=0;
 	
-	if(ui->sorting->currentText() == "Selection sort"){
-		for (int i = 0; i < qv_x.size(); i++) {
-			minim = i;
-			for(int j =i+1;j< qv_x.size();j++){
-				ui->comp->display(++comp);
-				if(qv_y[j]<qv_y[minim])
-					minim = j;
-				replotbars(i,j,minim);
-			}
-			if(qv_y[i] != qv_y[minim]){
-				ui->swi->display(++swi);
-				aux = qv_y[i];
-				qv_y[i] = qv_y[minim];
-				qv_y[minim] = aux;
-			}
-			
-		}
-		replotbars(-10,-10,-10);
-	}
-	//<bubble sort>
-	if(ui->sorting->currentText() == "Bubble sort"){
-		for (int i = 1; i < qv_x.size(); i++) {
-			for (int j = 0; j < qv_x.size() -i ; j++) {
-				ui->comp->display(++comp);
-				if (qv_y[j] > qv_y[j+1]) {
-					ui->swi->display(++swi);
-					aux = qv_y[j];
-					qv_y[j] = qv_y[j+1];
-					qv_y[j+1] = aux;
-				}
-				replotbars(j+1,j,qv_x.size()-i);
-			}
-		}
-		replotbars(-10,-10,-10);
-	}//</bubble sort>
-	//<insertion sort>
-	if(ui->sorting->currentText() == "Insertion sort"){
-		for (int i = 0; i < qv_y.size(); i++) {
-			aux = i;
-			while(aux>0){
-				ui->comp->display(++comp);
-				replotbars(i+1,aux,aux);
-				if(qv_y[aux-1]>qv_y[aux]){
-					ui->swi->display(++swi);
-					int temp = qv_y[aux-1];
-					qv_y[aux-1] = qv_y[aux];
-					qv_y[aux] =temp;
-				}
-				else{
-					break;
-				}
-			aux--;
-			}
-		}
-		replotbars(-10,-10,-10);
-	}//</insertion sort>	
-	if(ui->sorting->currentText() == "Merge sort"){
+	if(ui->sorting->currentText() == "Selection sort")
+		selectionSort();	
+	if(ui->sorting->currentText() == "Bubble sort")
+		bubbleSort();	
+	if(ui->sorting->currentText() == "Insertion sort")
+		insertionSort();
+	if(ui->sorting->currentText() == "Merge sort")
 		mergeSort(0,vsize-1);
-		replotbars(-10,-10,-10);
-	}
 }
-
-
 
 void sortplot::on_unsortButton_clicked(){
 	unsort();
@@ -128,6 +73,13 @@ void sortplot::replotbars(int minim,int key,int scan){
 void sortplot::unsort(){
 	for (int i = 0; i < qv_x.size(); i++){qv_x[i]=i;qv_y[i] = rand() % 1000;}//setting x from 0 to 99 and y to a random number
 	replotbars(-2,-2,-2);
+}
+void sortplot::on_spinBox_valueChanged(int arg1){
+		qv_x.resize(arg1);
+		qv_y.resize(arg1);
+		vsize=arg1;
+		ui->plot->xAxis->setRange(-1, arg1+1);
+		unsort();
 }
 
 void sortplot::merge(int l,int m,int r){
@@ -182,14 +134,60 @@ void sortplot::mergeSort(int l, int r) {
         mergeSort(l, m);//separa o vetor tem vários vetores menores, criando stacks de pequenos vetores na call
         mergeSort(m+1, r); 
         merge(l, m, r);
-    } 
+    }
+	replotbars(-10,-10,-10);
 } 
-
-
-void sortplot::on_spinBox_valueChanged(int arg1){
-		qv_x.resize(arg1);
-		qv_y.resize(arg1);
-		vsize=arg1;
-		ui->plot->xAxis->setRange(-1, arg1+1);
-		unsort();
+void sortplot::selectionSort(){
+	for (int i = 0; i < qv_x.size(); i++) {
+    	minim = i;
+    	for(int j =i+1;j< qv_x.size();j++){
+    		ui->comp->display(++comp);
+    		if(qv_y[j]<qv_y[minim])
+    			minim = j;
+    		replotbars(i,j,minim);
+    	}
+    	if(qv_y[i] != qv_y[minim]){
+    		ui->swi->display(++swi);
+    		aux = qv_y[i];
+    		qv_y[i] = qv_y[minim];
+    		qv_y[minim] = aux;
+    	}
+    	
+    }
+    replotbars(-10,-10,-10);//replot retirando highlights
+}
+void sortplot::bubbleSort(){
+	for (int i = 1; i < qv_x.size(); i++) {
+    	for (int j = 0; j < qv_x.size() -i ; j++) {
+    		ui->comp->display(++comp);
+    		if (qv_y[j] > qv_y[j+1]) {
+    			ui->swi->display(++swi);
+    			aux = qv_y[j];
+    			qv_y[j] = qv_y[j+1];
+    			qv_y[j+1] = aux;
+    		}
+    		replotbars(j+1,j,qv_x.size()-i);
+    	}
+    }
+    replotbars(-10,-10,-10);
+}
+void sortplot::insertionSort(){
+	for (int i = 0; i < qv_y.size(); i++) {
+    	aux = i;
+    	while(aux>0){
+    		ui->comp->display(++comp);
+    		replotbars(i+1,aux,aux);
+    		if(qv_y[aux-1]>qv_y[aux]){
+    			ui->swi->display(++swi);
+    			int temp = qv_y[aux-1];
+    			qv_y[aux-1] = qv_y[aux];
+    			qv_y[aux] =temp;
+    		}
+    		else{
+    			break;
+    		}
+    	aux--;
+    	}
+    }
+    replotbars(-10,-10,-10);
 }
