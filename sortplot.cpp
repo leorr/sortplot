@@ -208,15 +208,14 @@ void sortplot::shellSort(){
 	
 }
 int sortplot::partition(int low, int high){
-	int pivot = qv_y[high];    // pivot 
-    int i = (low - 1);  // Index of smaller element 
+	int pivot = qv_y[high];
+    int i = (low - 1);
   
     for (int j = low; j <= high- 1; j++) { 
     	ui->comp->display(++comp);
         replotbars(i,j,j);
 		if (qv_y[j] <= pivot) { 
-            i++;    // increment index of smaller element 
-            //swap(&arr[i], &arr[j]); 
+            i++;
 			int aux = qv_y[i];
 			qv_y[i]=qv_y[j];
 			qv_y[j]=aux;
@@ -233,9 +232,6 @@ int sortplot::partition(int low, int high){
 void sortplot::quickSort(int low, int high){
 	if (low < high) { 
         int pivot = partition(low, high); 
-  
-        // Separately sort elements before 
-        // partition and after partition 
         quickSort(low, pivot - 1); 
         quickSort(pivot + 1, high); 
     } 
