@@ -79,6 +79,7 @@ public:
         sorting->addItem(QString());
         sorting->addItem(QString());
         sorting->addItem(QString());
+        sorting->addItem(QString());
         sorting->setObjectName(QString::fromUtf8("sorting"));
         sorting->setGeometry(QRect(130, 0, 231, 24));
         sortplot->setCentralWidget(centralWidget);
@@ -100,6 +101,7 @@ public:
         sorting->setItemText(1, QApplication::translate("sortplot", "Merge sort", nullptr));
         sorting->setItemText(2, QApplication::translate("sortplot", "Bubble sort", nullptr));
         sorting->setItemText(3, QApplication::translate("sortplot", "Insertion sort", nullptr));
+        sorting->setItemText(4, QApplication::translate("sortplot", "Quick sort", nullptr));
 
     } // retranslateUi
 
