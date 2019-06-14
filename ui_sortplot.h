@@ -35,6 +35,7 @@ public:
     QLabel *label_4;
     QPushButton *sortButton;
     QPushButton *unsortButton;
+    QPushButton *resetButton;
     QComboBox *sorting;
 
     void setupUi(QMainWindow *sortplot)
@@ -74,7 +75,11 @@ public:
         unsortButton = new QPushButton(plot);
         unsortButton->setObjectName(QString::fromUtf8("unsortButton"));
         unsortButton->setGeometry(QRect(510, 30, 80, 24));
+        resetButton = new QPushButton(plot);
+        resetButton->setObjectName(QString::fromUtf8("resetButton"));
+        resetButton->setGeometry(QRect(420, 30, 80, 24));
         sorting = new QComboBox(plot);
+        sorting->addItem(QString());
         sorting->addItem(QString());
         sorting->addItem(QString());
         sorting->addItem(QString());
@@ -97,11 +102,13 @@ public:
         label_4->setText(QApplication::translate("sortplot", "N", nullptr));
         sortButton->setText(QApplication::translate("sortplot", "sort", nullptr));
         unsortButton->setText(QApplication::translate("sortplot", "unsort", nullptr));
+        resetButton->setText(QApplication::translate("sortplot", "reset", nullptr));
         sorting->setItemText(0, QApplication::translate("sortplot", "Selection sort", nullptr));
         sorting->setItemText(1, QApplication::translate("sortplot", "Merge sort", nullptr));
         sorting->setItemText(2, QApplication::translate("sortplot", "Bubble sort", nullptr));
         sorting->setItemText(3, QApplication::translate("sortplot", "Insertion sort", nullptr));
         sorting->setItemText(4, QApplication::translate("sortplot", "Quick sort", nullptr));
+        sorting->setItemText(5, QApplication::translate("sortplot", "Shell sort", nullptr));
 
     } // retranslateUi
 

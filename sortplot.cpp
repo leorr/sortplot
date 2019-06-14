@@ -1,8 +1,9 @@
 #include "sortplot.h"
 #include "ui_sortplot.h"
+#include <iostream>
 
 int vsize=10;
-QVector<double> qv_x(vsize),qv_y(vsize);
+QVector<double> qv_x(vsize),qv_y(vsize),qv_tmp(vsize);
 int minv,aux;//variavéis unicamente auxíliares
 int comp,swi;//contador de comparações e trocas realizadas
 
@@ -35,6 +36,8 @@ void sortplot::on_sortButton_clicked(){
 		mergeSort(0,vsize-1);
 	if(ui->sorting->currentText() == "Quick sort")
 		quickSort(0,vsize-1);
+	if(ui->sorting->currentText() == "Shell sort")
+		shellSort();
 
 }
 
@@ -45,6 +48,7 @@ void sortplot::on_unsortButton_clicked(){
 void sortplot::replotbars(int minv,int key,int scan){
 	
 	QCPBars* nbar;
+
 	QCPBars* keybar;
 	QCPBars* minvbar;
 	QCPBars* scanbar;
@@ -75,7 +79,15 @@ void sortplot::replotbars(int minv,int key,int scan){
 }
 
 void sortplot::unsort(){
-	for (int i = 0; i < qv_x.size(); i++){qv_x[i]=i;qv_y[i] = rand() % 1000;}//setting x from 0 to 99 and y to a random number
+	for (int i = 0; i < qv_x.size(); i++){
+		qv_x[i]=i;
+		qv_y[i] = rand() % 1000;
+	}//x =(0;99) y={?;?}
+	qv_tmp = qv_y;
+	replotbars(-2,-2,-2);
+}
+void sortplot::on_resetButton_clicked(){
+	qv_y= qv_tmp;
 	replotbars(-2,-2,-2);
 }
 
@@ -203,14 +215,24 @@ void sortplot::insertionSort(){
 
 void sortplot::shellSort(){
 	for (int gap = qv_x.size()/2 ;  gap > 0;  gap /= 2) {
-			
-	}
-	
+		for (int i = gap; i < qv_y.size(); i += 1){ 
+            int temp = qv_y[i]; 
+            int j;
+			ui->comp->display(++comp);
+            for (j = i; j >= gap && qv_y[j - gap] > temp; j -= gap){
+				replotbars(j,j-gap,j-gap);
+                qv_y[j] = qv_y[j - gap];
+				ui->swi->display(++swi);
+			}
+			replotbars(j,j-gap,j-gap);
+            qv_y[j] = temp;
+			ui->swi->display(++swi);
+        } 
+    } 		
 }
 int sortplot::partition(int low, int high){
 	int pivot = qv_y[high];
     int i = (low - 1);
-  
     for (int j = low; j <= high- 1; j++) { 
     	ui->comp->display(++comp);
         replotbars(i,j,j);

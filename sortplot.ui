@@ -113,7 +113,8 @@
      <property name="text">
       <string>sort</string>
      </property>
-    </widget>
+	</widget>
+
     <widget class="QPushButton" name="unsortButton">
      <property name="geometry">
       <rect>
@@ -126,7 +127,22 @@
      <property name="text">
       <string>unsort</string>
      </property>
+	</widget>
+
+	<widget class="QPushButton" name="resetButton">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>30</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>reset</string>
+     </property>
     </widget>
+
     <widget class="QComboBox" name="sorting">
      <property name="geometry">
       <rect>
@@ -159,6 +175,11 @@
 	 <item>
       <property name="text">
        <string>Quick sort</string>
+      </property>
+     </item>
+	 <item>
+      <property name="text">
+       <string>Shell sort</string>
       </property>
      </item>
     </widget>

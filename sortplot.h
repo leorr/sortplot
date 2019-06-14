@@ -26,6 +26,7 @@ private slots:
 
 	void on_sortButton_clicked();
 	void on_unsortButton_clicked();
+	void on_resetButton_clicked();
     void on_spinBox_valueChanged(int arg1);
 
 	void merge(int l,int m,int r);
