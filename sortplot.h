@@ -37,6 +37,7 @@ private slots:
 	void quickSort(int low, int high);
 	int partition(int low, int high);
 	void shellSort();
+	void countSort();
 
 
 private:

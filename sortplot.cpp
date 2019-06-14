@@ -38,6 +38,8 @@ void sortplot::on_sortButton_clicked(){
 		quickSort(0,vsize-1);
 	if(ui->sorting->currentText() == "Shell sort")
 		shellSort();
+	if(ui->sorting->currentText() == "Count sort")
+		countSort();
 
 }
 
@@ -258,3 +260,38 @@ void sortplot::quickSort(int low, int high){
         quickSort(pivot + 1, high); 
     } 
 } 
+
+
+void sortplot::countSort(){  
+	//criar um vetor int vtmp de 1200 posições preenchido com 0
+	QVector<double> output(vsize);
+	int count[1200 + 1], i;
+	for (int aux = 0; aux<1201; aux++)
+			count[aux]=0;
+
+	//ler o vetor principal, sempre que encontrar i valor, incrementar vtmp[i] 
+	for(i = 0; i<vsize; i++)  
+        ++count[(int)qv_y[i]];
+
+	//para j de 0 a 1200 vtmp[j+1] += vtmp[j]
+	for (i = 1; i <= 1200; ++i)  
+        count[i] += count[i-1];
+
+	
+	//criamos um vetor vaux com o mesmo tamnho do vetor princpal
+	//nas posições correspondentes é colocado o valor (index de vtmp) e -- vtmp
+	for (i = 0; i<vsize; i++){
+        output[count[(int)qv_y[i]]-1] = qv_y[i];
+        --count[(int)qv_y[i]];
+    }
+	for (i = 0; i<vsize; i++){
+		ui->swi->display(++swi);
+        qv_y[i] = output[i];
+		replotbars(i,i,i);
+	}
+}
+
+
+
+
+
