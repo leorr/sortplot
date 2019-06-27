@@ -151,8 +151,8 @@ void sortplot::merge(int l,int m,int r){
 void sortplot::mergeSort(int l, int r) { 
     if (l < r){ 
         int m = l+(r-l)/2;//l=0, r = tamanho -1
-        mergeSort(l, m);//separa o vetor tem vários vetores menores, criando stacks de pequenos vetores na call
-        mergeSort(m+1, r); 
+        mergeSort(l, m);//separa o vetor em vários vetores menores
+        mergeSort(m+1, r);//stacks de pequenos vetores na call
         merge(l, m, r);
     }
 	replotbars(-10,-10,-10);
@@ -195,22 +195,17 @@ void sortplot::bubbleSort(){
 }
 
 void sortplot::insertionSort(){
-	for (int i = 0; i < qv_y.size(); i++) {
-    	aux = i;
-    	while(aux>0){
-    		ui->comp->display(++comp);
-    		replotbars(i+1,aux,aux);
-    		if(qv_y[aux-1]>qv_y[aux]){
-    			ui->swi->display(++swi);
-    			int temp = qv_y[aux-1];
-    			qv_y[aux-1] = qv_y[aux];
-    			qv_y[aux] =temp;
-    		}
-    		else{
-    			break;
-    		}
-    	aux--;
-    	}
+	for (int i = 1; i < qv_y.size(); i++) {
+    	int k = qv_y[i];
+		int j = i-1;
+		ui->comp->display(++comp);
+		while(j>=0 && qv_y[j] > k){
+			ui->swi->display(++swi);
+			qv_y[j+1] = qv_y[j];
+			j--;
+			replotbars(j+1,j,i);
+		}
+		qv_y[j+1]=k;
     }
     replotbars(-10,-10,-10);
 }
@@ -231,6 +226,7 @@ void sortplot::shellSort(){
 			ui->swi->display(++swi);
         } 
     } 		
+    replotbars(-10,-10,-10);
 }
 int sortplot::partition(int low, int high){
 	int pivot = qv_y[high];
@@ -259,6 +255,7 @@ void sortplot::quickSort(int low, int high){
         quickSort(low, pivot - 1); 
         quickSort(pivot + 1, high); 
     } 
+    replotbars(-10,-10,-10);
 } 
 
 
@@ -277,7 +274,6 @@ void sortplot::countSort(){
 	for (i = 1; i <= 1200; ++i)  
         count[i] += count[i-1];
 
-	
 	//criamos um vetor vaux com o mesmo tamnho do vetor princpal
 	//nas posições correspondentes é colocado o valor (index de vtmp) e -- vtmp
 	for (i = 0; i<vsize; i++){
@@ -289,9 +285,6 @@ void sortplot::countSort(){
         qv_y[i] = output[i];
 		replotbars(i,i,i);
 	}
+
+    replotbars(-10,-10,-10);
 }
-
-
-
-
-
