@@ -2,7 +2,7 @@
 #include "ui_sortplot.h"
 #include <iostream>
 
-int range=10;
+int range=10000;
 int vsize=10;
 QVector<double> qv_x(vsize),qv_y(vsize),qv_tmp(vsize);
 int minv,aux;//variavéis unicamente auxíliares

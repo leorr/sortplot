@@ -199,7 +199,7 @@ public:
         spinBox_2->setAccelerated(false);
         spinBox_2->setMinimum(1);
         spinBox_2->setMaximum(9999999);
-        spinBox_2->setValue(10);
+        spinBox_2->setValue(10000);
         comp = new QLCDNumber(centralWidget);
         comp->setObjectName(QString::fromUtf8("comp"));
         comp->setGeometry(QRect(900, 20, 91, 31));
