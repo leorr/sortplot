@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'sortplot.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.4
+** Created by: Qt User Interface Compiler version 5.13.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -86,6 +86,7 @@ public:
         sorting->addItem(QString());
         sorting->addItem(QString());
         sorting->addItem(QString());
+        sorting->addItem(QString());
         sorting->setObjectName(QString::fromUtf8("sorting"));
         sorting->setGeometry(QRect(130, 0, 231, 24));
         sortplot->setCentralWidget(centralWidget);
@@ -97,20 +98,21 @@ public:
 
     void retranslateUi(QMainWindow *sortplot)
     {
-        sortplot->setWindowTitle(QApplication::translate("sortplot", "sortplot", nullptr));
-        label_2->setText(QApplication::translate("sortplot", "Compara\303\247\303\265es", nullptr));
-        label->setText(QApplication::translate("sortplot", "Trocas", nullptr));
-        label_4->setText(QApplication::translate("sortplot", "N", nullptr));
-        sortButton->setText(QApplication::translate("sortplot", "sort", nullptr));
-        unsortButton->setText(QApplication::translate("sortplot", "unsort", nullptr));
-        resetButton->setText(QApplication::translate("sortplot", "reset", nullptr));
-        sorting->setItemText(0, QApplication::translate("sortplot", "Selection sort", nullptr));
-        sorting->setItemText(1, QApplication::translate("sortplot", "Merge sort", nullptr));
-        sorting->setItemText(2, QApplication::translate("sortplot", "Bubble sort", nullptr));
-        sorting->setItemText(3, QApplication::translate("sortplot", "Insertion sort", nullptr));
-        sorting->setItemText(4, QApplication::translate("sortplot", "Quick sort", nullptr));
-        sorting->setItemText(5, QApplication::translate("sortplot", "Count sort", nullptr));
-        sorting->setItemText(6, QApplication::translate("sortplot", "Shell sort", nullptr));
+        sortplot->setWindowTitle(QCoreApplication::translate("sortplot", "sortplot", nullptr));
+        label_2->setText(QCoreApplication::translate("sortplot", "Compara\303\247\303\265es", nullptr));
+        label->setText(QCoreApplication::translate("sortplot", "Trocas", nullptr));
+        label_4->setText(QCoreApplication::translate("sortplot", "N", nullptr));
+        sortButton->setText(QCoreApplication::translate("sortplot", "sort", nullptr));
+        unsortButton->setText(QCoreApplication::translate("sortplot", "unsort", nullptr));
+        resetButton->setText(QCoreApplication::translate("sortplot", "reset", nullptr));
+        sorting->setItemText(0, QCoreApplication::translate("sortplot", "Selection sort", nullptr));
+        sorting->setItemText(1, QCoreApplication::translate("sortplot", "Bubble sort", nullptr));
+        sorting->setItemText(2, QCoreApplication::translate("sortplot", "Insertion sort", nullptr));
+        sorting->setItemText(3, QCoreApplication::translate("sortplot", "Merge sort", nullptr));
+        sorting->setItemText(4, QCoreApplication::translate("sortplot", "Quick sort", nullptr));
+        sorting->setItemText(5, QCoreApplication::translate("sortplot", "Count sort", nullptr));
+        sorting->setItemText(6, QCoreApplication::translate("sortplot", "Shell sort", nullptr));
+        sorting->setItemText(7, QCoreApplication::translate("sortplot", "Shell sort Knuth", nullptr));
 
     } // retranslateUi
 

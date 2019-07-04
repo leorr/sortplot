@@ -14,6 +14,7 @@ sortplot::sortplot(QWidget *parent) :
 			ui->plot->xAxis->grid()->setVisible(false);
 			ui->plot->xAxis->setRange(-1, vsize);
 			ui->plot->yAxis->setRange(0, 1200);
+			ui->plot->xAxis->setTickLength(2);
 			unsort();
 	}//init
 
@@ -38,6 +39,8 @@ void sortplot::on_sortButton_clicked(){
 		quickSort(0,vsize-1);
 	if(ui->sorting->currentText() == "Shell sort")
 		shellSort();
+	if(ui->sorting->currentText() == "Shell sort Knuth")
+		shellSortKnuth();
 	if(ui->sorting->currentText() == "Count sort")
 		countSort();
 
@@ -55,7 +58,6 @@ void sortplot::replotbars(int minv,int key,int scan){
 	QCPBars* minvbar;
 	QCPBars* scanbar;
 	
-	
 	ui->plot->clearPlottables();
 	
 	scanbar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
@@ -64,7 +66,7 @@ void sortplot::replotbars(int minv,int key,int scan){
 	keybar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
 	
 	nbar->setStackingGap(0);
-	nbar->setPen(QPen(QColor(111, 9, 176).lighter(170)));
+	nbar->setPen(QPen(QColor(111, 9, 176,0).lighter(170)));
 	nbar->setBrush(QColor(111, 9, 176));
 	nbar->setData(qv_x,qv_y);
 	
@@ -116,13 +118,13 @@ void sortplot::merge(int l,int m,int r){
     while (i < n1 && j < n2){ 
 		ui->comp->display(++comp);
         if (L[i] <= R[j]) {
-			replotbars(k,k,k);
+			replotbars(k,l,r);
 			ui->swi->display(++swi);
             qv_y[k] = L[i]; 
             i++; 
         } 
         else{ 
-			replotbars(k,k,k);
+			replotbars(k,l,r);
 			ui->swi->display(++swi);
             qv_y[k] = R[j]; 
             j++; 
@@ -131,7 +133,7 @@ void sortplot::merge(int l,int m,int r){
     } 
   
     while (i < n1){ 
-		replotbars(k,k,k);
+		replotbars(k,l,r);
 		ui->swi->display(++swi);
         qv_y[k] = L[i]; 
         i++; 
@@ -165,7 +167,7 @@ void sortplot::selectionSort(){
     		ui->comp->display(++comp);
     		if(qv_y[j]<qv_y[minv])
     			minv = j;
-    		replotbars(i,j,minv);
+    		replotbars(minv,j,i);
     	}
     	if(qv_y[i] != qv_y[minv]){
     		ui->swi->display(++swi);
@@ -203,13 +205,34 @@ void sortplot::insertionSort(){
 			ui->swi->display(++swi);
 			qv_y[j+1] = qv_y[j];
 			j--;
-			replotbars(j+1,j,i);
+			replotbars(i+1,j+1,i);
 		}
 		qv_y[j+1]=k;
     }
     replotbars(-10,-10,-10);
 }
-
+void sortplot::shellSortKnuth(){
+	int h = 1;
+	while(h<qv_y.size()/3)
+		h=(3*h)+1;
+	while(h>=1){
+		for (int i = h; i < qv_y.size(); i += 1){ 
+			int temp = qv_y[i]; 
+        	int j;
+			ui->comp->display(++comp);
+        	for (j = i; j >= h && qv_y[j - h] > temp; j -= h){
+				replotbars(j,j-h,-2);
+            	qv_y[j] = qv_y[j - h];
+				ui->swi->display(++swi);
+			}
+			replotbars(j,j-h,-2);
+        	qv_y[j] = temp;
+			ui->swi->display(++swi);
+		}
+		h=h/3;
+	}
+    replotbars(-10,-10,-10);
+}
 void sortplot::shellSort(){
 	for (int gap = qv_x.size()/2 ;  gap > 0;  gap /= 2) {
 		for (int i = gap; i < qv_y.size(); i += 1){ 
@@ -217,11 +240,11 @@ void sortplot::shellSort(){
             int j;
 			ui->comp->display(++comp);
             for (j = i; j >= gap && qv_y[j - gap] > temp; j -= gap){
-				replotbars(j,j-gap,j-gap);
+				replotbars(j,j-gap,-2);
                 qv_y[j] = qv_y[j - gap];
 				ui->swi->display(++swi);
 			}
-			replotbars(j,j-gap,j-gap);
+			replotbars(j,j-gap,-2);
             qv_y[j] = temp;
 			ui->swi->display(++swi);
         } 
@@ -233,7 +256,7 @@ int sortplot::partition(int low, int high){
     int i = (low - 1);
     for (int j = low; j <= high- 1; j++) { 
     	ui->comp->display(++comp);
-        replotbars(i,j,j);
+        replotbars(i,j,high);
 		if (qv_y[j] <= pivot) { 
             i++;
 			int aux = qv_y[i];

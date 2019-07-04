@@ -159,17 +159,17 @@
      </item>
      <item>
       <property name="text">
-       <string>Merge sort</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>Bubble sort</string>
       </property>
      </item>
      <item>
       <property name="text">
        <string>Insertion sort</string>
+      </property>
+     </item>
+	 <item>
+      <property name="text">
+       <string>Merge sort</string>
       </property>
      </item>
 	 <item>
@@ -185,6 +185,11 @@
 	 <item>
       <property name="text">
        <string>Shell sort</string>
+      </property>
+     </item>
+	 <item>
+      <property name="text">
+       <string>Shell sort Knuth</string>
       </property>
      </item>
     </widget>
