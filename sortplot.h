@@ -22,7 +22,7 @@ public:
 
 private slots:
 	void unsort();
-	void replotbars(int min,int key,int scan);
+	void replotbars(int min,int key,int scan,int scani);
 
 	void on_sortButton_clicked();
 	void on_unsortButton_clicked();
@@ -40,6 +40,8 @@ private slots:
 	void shellSortKnuth();
 	void countSort();
 
+
+    void on_spinBox_2_valueChanged(int arg1);
 
 private:
 	Ui::sortplot *ui;
