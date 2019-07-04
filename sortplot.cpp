@@ -92,6 +92,33 @@ void sortplot::replotbars(int minv,int key,int scan,int scani){
 
 	ui->plot->replot();
 }
+void sortplot::replotbars(int e1,int e2){
+	
+	QCPBars* nbar;
+
+	QCPBars* be1;
+	QCPBars* be2;
+	
+	ui->plot->clearPlottables();
+	
+	nbar = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+	be1 = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+	be2 = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+	
+	nbar->setStackingGap(0);
+	nbar->setPen(QPen(QColor(111, 9, 176,0).lighter(170)));
+	nbar->setBrush(QColor(111, 9, 176));
+	nbar->setData(qv_x,qv_y);
+	
+	be1->setPen(QColor(255,0,0));
+	be1->addData(e1,range+2*range/10);
+
+	be2->setPen(QColor(255,0,0));
+	be2->addData(e2,range+2*range/10);
+
+	ui->plot->replot();
+}
+
 
 void sortplot::unsort(){
 	for (int i = 0; i < qv_x.size(); i++){
@@ -230,15 +257,18 @@ void sortplot::insertionSort(){
 		int j = i-1;
 		ui->comp->display(++comp);
 		while(j>=0 && qv_y[j] > k){
+		ui->comp->display(++comp);
 			ui->swi->display(++swi);
 			qv_y[j+1] = qv_y[j];
 			j--;
 			replotbars(i+1,j+1,i,-2);
+			ui->comp->display(++comp);
 		}
 		qv_y[j+1]=k;
     }
     replotbars(-10,-10,-10,-2);
 }
+
 void sortplot::shellSortKnuth(){
 	ui->mem->display(16);
 	int h = 1;
@@ -250,12 +280,14 @@ void sortplot::shellSortKnuth(){
         	int j;
 			ui->comp->display(++comp);
         	for (j = i; j >= h && qv_y[j - h] > temp; j -= h){
-				replotbars(j,j-h,-2,-2);
+				replotbars(j,j-h);
             	qv_y[j] = qv_y[j - h];
+				replotbars(j,j-h);
 				ui->swi->display(++swi);
 			}
-			replotbars(j,j-h,-2,-2);
+			replotbars(j,i);
         	qv_y[j] = temp;
+			replotbars(j,i);
 			ui->swi->display(++swi);
 		}
 		h=h/3;
@@ -270,12 +302,14 @@ void sortplot::shellSort(){
             int j;
 			ui->comp->display(++comp);
             for (j = i; j >= gap && qv_y[j - gap] > temp; j -= gap){
-				replotbars(j,j-gap,-2,-2);
+				replotbars(j,j-gap);
                 qv_y[j] = qv_y[j - gap];
+				replotbars(j,j-gap);
 				ui->swi->display(++swi);
 			}
-			replotbars(j,j-gap,-2,-2);
+			replotbars(j,i);
             qv_y[j] = temp;
+			replotbars(j,i);
 			ui->swi->display(++swi);
         } 
     } 		
@@ -318,7 +352,7 @@ void sortplot::countSort(){
 	ui->mem->display(vsize*4 + 4*range + 4);
 
 	int output[vsize];
-	int count[range], i;
+	int count[range+1], i;
 	for (int aux = 0; aux<range; aux++)
 			count[aux]=0;
 
